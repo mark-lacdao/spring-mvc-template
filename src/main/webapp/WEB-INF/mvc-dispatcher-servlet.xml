@@ -12,6 +12,9 @@
 
     <mvc:resources mapping="/resources/**" location="/resources/" />
 
+    <import resource="classpath:hibernate.xml"/>
+    <import resource="classpath:datasource.xml"/>
+
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
     </bean>

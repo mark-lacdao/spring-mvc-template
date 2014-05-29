@@ -1,5 +1,7 @@
 package org.nerv.boilingriver.controller;
 
+import org.nerv.boilingriver.domain.Person;
+import org.nerv.boilingriver.service.PersonService;
 import org.nerv.boilingriver.service.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,9 @@ public class BaseController {
     @Autowired
     private SampleService sampleService;
 
+    @Autowired
+    private PersonService personService;
+
     @RequestMapping(value="/", method = RequestMethod.GET)
     public String welcome(ModelMap model) {
 
@@ -31,6 +36,8 @@ public class BaseController {
     public String welcomeName(@PathVariable String name, ModelMap model) {
 
         model.addAttribute("message", "Maven Web Project + Spring 3 MVC - " + sampleService.reverse(name));
+        Person person = personService.createPerson(name, Integer.valueOf(10));
+        personService.save(person);
         return "index";
 
     }
