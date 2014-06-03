@@ -1,10 +1,13 @@
 package org.nerv.boilingriver.service;
 
+import org.hibernate.SessionFactory;
 import org.nerv.boilingriver.dao.PersonDao;
 import org.nerv.boilingriver.domain.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 /**
@@ -44,7 +47,16 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person findById(Integer id) {
-        return personDao.findById(id);
+    @Transactional(readOnly = true)
+    public Person findById(Long id) {
+        return personDao.find(id);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Person> findAll() {
+        return personDao.findAll();
+    }
+
+
 }

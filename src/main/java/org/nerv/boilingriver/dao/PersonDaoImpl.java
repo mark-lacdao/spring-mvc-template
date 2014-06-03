@@ -1,10 +1,14 @@
 package org.nerv.boilingriver.dao;
 
+import com.googlecode.genericdao.dao.hibernate.GenericDAOImpl;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.nerv.boilingriver.domain.Person;
 import org.nerv.boilingriver.hibernate.CustomHibernateDaoSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,15 +18,15 @@ import java.util.List;
 @Repository
 public class PersonDaoImpl extends CustomHibernateDaoSupport implements PersonDao {
 
+
     @Override
     public void save(Person person) {
-        System.out.println("Saving person with name ".concat(person.getName()));
         getHibernateTemplate().save(person);
     }
 
     @Override
     public void update(Person person) {
-        getHibernateTemplate().update(person);
+        getHibernateTemplate().saveOrUpdate(person);
     }
 
     @Override
@@ -31,15 +35,20 @@ public class PersonDaoImpl extends CustomHibernateDaoSupport implements PersonDa
     }
 
     @Override
-    public Person findById(Integer id) {
+    public Person find(Long id) {
         DetachedCriteria detachedCriteria = getDetachedCriteria();
-        detachedCriteria.add(Restrictions.eq("ID", id));
+        detachedCriteria.add(Restrictions.eq("id", id));
         List<Person> persons = getHibernateTemplate().findByCriteria(detachedCriteria);
         return persons.get(0);
+    }
+
+    @Override
+    public List<Person> findAll() {
+        //TODO: Implement
+        return null;
     }
 
     private DetachedCriteria getDetachedCriteria(){
         return DetachedCriteria.forClass(Person.class);
     }
-
 }

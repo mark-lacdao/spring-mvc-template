@@ -32,7 +32,14 @@ public class BaseController {
 
     }
 
-    @RequestMapping(value="/{name}", method = RequestMethod.GET)
+    /**
+     * An example for path processing
+     *
+     * @param name The path string which will be processed
+     * @param model Spring MVC model.
+     * @return The filename of the jsp page that will be used for rendering.
+     */
+    /*@RequestMapping(value="/{name}", method = RequestMethod.GET)
     public String welcomeName(@PathVariable String name, ModelMap model) {
 
         model.addAttribute("message", "Maven Web Project + Spring 3 MVC - " + sampleService.reverse(name));
@@ -40,6 +47,6 @@ public class BaseController {
         personService.save(person);
         return "index";
 
-    }
+    }*/
 
 }
