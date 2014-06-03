@@ -1,7 +1,7 @@
 spring-mvc-template
 ===================
 
-A spring MVC template for my webapps. Compatible with Heroku. :)
+A spring MVC template for my webapps. Compatible with Heroku. :) Uses postgreSQL as the database.
 
 Running Using Jetty
 ===================
